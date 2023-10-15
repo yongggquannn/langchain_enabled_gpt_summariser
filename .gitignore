@@ -1,2 +1,5 @@
+# Ignore vscode
+/.vscode
+
 # .gitignore 
 apikey.py
