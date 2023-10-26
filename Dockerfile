@@ -2,7 +2,7 @@ FROM python:3.9
 
 ADD app.py .
 
-RUN pip install streamlit langchain openai chromadb tiktoken pypdf
+RUN pip install streamlit pypdf2 langchain python-dotenv faiss-cpu openai huggingface_hub
 
 EXPOSE 8501
 

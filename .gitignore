@@ -3,3 +3,6 @@
 
 # .gitignore 
 apikey.py
+
+# Environments
+.env
