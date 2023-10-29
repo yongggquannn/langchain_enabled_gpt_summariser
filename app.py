@@ -101,15 +101,13 @@ def get_text_chunks(text):
 
 
 def get_vectorstore(text_chunks):
-    # embeddings = OpenAIEmbeddings()
-    embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-xl")
+    embeddings = OpenAIEmbeddings()
     vectorstore = FAISS.from_texts(text_chunks, embeddings)
     return vectorstore
 
 
 def get_conversation_chain(vectorstore):
-    # llm = ChatOpenAI()
-    llm = HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature":0.9, "max_length":1024})
+    llm = ChatOpenAI()
 
     memory = ConversationBufferMemory(
         memory_key='chat_history', return_messages=True)
