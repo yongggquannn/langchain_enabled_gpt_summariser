@@ -66,7 +66,7 @@ def handle_user_input(user_question):
 
 def main():
     load_dotenv()
-    st.set_page_config(page_title="Chat with multiple PDFs", page_icon=":books:")
+    st.set_page_config(page_title="GPT Summariser", page_icon=":whale:")
     st.write(css, unsafe_allow_html=True)
 
     # Initialise as empty string and update whenever files are processed
@@ -77,7 +77,7 @@ def main():
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = None
 
-    st.header("Chat with multiple PDFs :books:")
+    st.header("LangChain-enabled GPT Summariser :whale:")
     user_question = st.text_input("Ask a question about your documents:")
     if user_question:
         # Retrieving AI answer
@@ -103,7 +103,7 @@ def main():
         pdf_docs = st.file_uploader(
             "Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
         if st.button("Process"):
-            with st.spinner("Processing"):
+            with st.spinner("Wait you bastard"):
                 # get pdf text
                 raw_text = get_pdf_text(pdf_docs)
                 source_text = raw_text

@@ -28,7 +28,7 @@ color: #fff;
 bot_template = '''
 <div class="chat-message bot">
     <div class="avatar">
-        <img src="./images/Mic_Face.jpeg" style="max-height: 78px; max-width: 78px; border-radius: 50%; object-fit: cover;">
+        <img src="https://www.cartoonbucket.com/wp-content/uploads/2015/08/Photo-Of-Spongebob.jpg" style="max-height: 78px; max-width: 78px; border-radius: 50%; object-fit: cover;">
     </div>
     <div class="message">{{MSG}}</div>
 </div>
@@ -37,7 +37,7 @@ bot_template = '''
 user_template = '''
 <div class="chat-message user">
     <div class="avatar">
-        <img src="./images/YuTao_Face.jpeg">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/1200px-Patrick_Star.svg.png">
     </div>    
     <div class="message">{{MSG}}</div>
 </div>
