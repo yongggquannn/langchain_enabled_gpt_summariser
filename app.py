@@ -94,14 +94,16 @@ def main():
                                                                                                        model_type= 'local').metric_values[0]
         print(f'This answer has a fluency score of: {fluency_score}')
         print(f'This answer has an accuracy score of: {factual_consistency_score}')
+        
             
+
 
     with st.sidebar:
         st.subheader("Your documents")
         pdf_docs = st.file_uploader(
             "Upload your PDFs here and click on 'Process'", accept_multiple_files=False)
         if st.button("Process"):
-            with st.spinner("Processing"):
+            with st.spinner("Wait you clown"):
                 # get pdf text
                 raw_text = get_pdf_text(pdf_docs)
                 source_text = raw_text
@@ -114,6 +116,9 @@ def main():
 
                 # create conversation chain
                 st.session_state.conversation = get_conversation_chain(vectorstore)
+
+
+    
 
 
 if __name__ == '__main__':
