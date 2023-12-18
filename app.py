@@ -1,5 +1,4 @@
 import streamlit as st
-from dotenv import load_dotenv
 from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
@@ -118,19 +117,19 @@ def main():
                 queries_answers = handle_user_input(user_question)
                 ai_answer = queries_answers[-1].content
 
-                # Adding fluency score into main 
-                fluency_score = langcheck.metrics.fluency(ai_answer).metric_values[0]
+                # # Adding fluency score into main 
+                # fluency_score = langcheck.metrics.fluency(ai_answer).metric_values[0]
 
-                # Adding factual consistency score
-                factual_consistency_score = langcheck.metrics.en.source_based_text_quality.factual_consistency(generated_outputs= ai_answer,
-                                                                                                                sources = source_text,
-                                                                                                                prompts= user_question,
-                                                                                                                model_type= 'local').metric_values[0]
+                # # Adding factual consistency score
+                # factual_consistency_score = langcheck.metrics.en.source_based_text_quality.factual_consistency(generated_outputs= ai_answer,
+                #                                                                                                 sources = source_text,
+                #                                                                                                 prompts= user_question,
+                #                                                                                                 model_type= 'local').metric_values[0]
 
-                st.markdown(f"""
-                    <strong style="font-size: 20px; color: white;">This answer has a fluency score of: {fluency_score}</strong><br>
-                    <strong style="font-size: 20px; color: white;">This answer has an accuracy score of: {factual_consistency_score}</strong>
-                """, unsafe_allow_html=True)
+                # st.markdown(f"""
+                #     <strong style="font-size: 20px; color: white;">This answer has a fluency score of: {fluency_score}</strong><br>
+                #     <strong style="font-size: 20px; color: white;">This answer has an accuracy score of: {factual_consistency_score}</strong>
+                # """, unsafe_allow_html=True)
         # Invalid API key
         elif not check_api_key(api_key):
             st.error("Invalid API Key")
