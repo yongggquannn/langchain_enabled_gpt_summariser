@@ -113,7 +113,7 @@ def main():
         user_question = st.text_input("Ask a question about your documents:")
         submit_button = st.button("Submit")
 
-        if submit_button:
+        if submit_button and user_question:
             # Retrieving AI answer
             queries_answers = handle_user_input(user_question)
             ai_answer = queries_answers[-1].content
@@ -132,7 +132,7 @@ def main():
                 #     <strong style="font-size: 20px; color: white;">This answer has an accuracy score of: {factual_consistency_score}</strong>
                 # """, unsafe_allow_html=True)
     
-    
+
     with st.sidebar:
         st.subheader("Your documents")
         pdf_docs = st.file_uploader(
