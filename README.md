@@ -2,7 +2,7 @@
 
 ## Project Description: 
 
-The project aims to develop a PDF querying system that leverages LangChain, a powerful language processing tool, to extract information from PDF documents. 
+The project aims to develop a PDF querying system that leverages LangChain, a powerful language processing tool, to extract information from PDF documents. Users are required to key in their OpenAI API Key to be able to use this PDF Reader. 
 
 ## Website
 https://langchain-enabled-gpt-summariser-bphxyotpwrirspzh9bodpf.streamlit.app/
