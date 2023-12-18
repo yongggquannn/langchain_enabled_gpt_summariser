@@ -81,11 +81,9 @@ def handle_user_input(user_question):
 
 
 def main():
+
     st.set_page_config(page_title="GPT Summariser", page_icon=":whale:")
     st.write(css, unsafe_allow_html=True)
-
-    # Initialise as empty string and update whenever files are processed
-    source_text = "" 
 
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
@@ -97,25 +95,28 @@ def main():
     # Create a placeholder for the input field
     api_key_placeholder = st.empty()
 
-    # Input field for OpenAI API key
-    api_key = api_key_placeholder.text_input("Enter your OpenAI API Key:")
+    if not os.environ.get("OPENAI_API_KEY"):
+        api_key = api_key_placeholder.text_input("Enter your OpenAI API Key:")
 
-    # Check if API key has been entered
-    if api_key:
-        if check_api_key(api_key):
+        if api_key and check_api_key(api_key):
             # Clear the input field
             api_key_placeholder.empty()
 
             # Set the API key in the environment variables
             os.environ["OPENAI_API_KEY"] = api_key
+        elif api_key:
+            st.error("Invalid API Key")
 
-            user_question = st.text_input("Ask a question about your documents:")
-            submit_button = st.button("Submit")
+    if os.environ.get("OPENAI_API_KEY"):
 
-            if submit_button:
-                # Retrieving AI answer
-                queries_answers = handle_user_input(user_question)
-                ai_answer = queries_answers[-1].content
+
+        user_question = st.text_input("Ask a question about your documents:")
+        submit_button = st.button("Submit")
+
+        if submit_button:
+            # Retrieving AI answer
+            queries_answers = handle_user_input(user_question)
+            ai_answer = queries_answers[-1].content
 
                 # # Adding fluency score into main 
                 # fluency_score = langcheck.metrics.fluency(ai_answer).metric_values[0]
@@ -130,12 +131,8 @@ def main():
                 #     <strong style="font-size: 20px; color: white;">This answer has a fluency score of: {fluency_score}</strong><br>
                 #     <strong style="font-size: 20px; color: white;">This answer has an accuracy score of: {factual_consistency_score}</strong>
                 # """, unsafe_allow_html=True)
-        # Invalid API key
-        elif not check_api_key(api_key):
-            st.error("Invalid API Key")
     
-
-
+    
     with st.sidebar:
         st.subheader("Your documents")
         pdf_docs = st.file_uploader(
@@ -144,7 +141,6 @@ def main():
             with st.spinner("Processing..."):
                 # get pdf text
                 raw_text = get_pdf_text(pdf_docs)
-                source_text = raw_text
 
                 # get the text chunks
                 text_chunks = get_text_chunks(raw_text)
@@ -154,7 +150,14 @@ def main():
 
                 # create conversation chain
                 st.session_state.conversation = get_conversation_chain(vectorstore)
-
+                
+def app():
+    try:
+        main()
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+        if st.button("Go back to main page"):
+            st.experimental_rerun()
 
 if __name__ == '__main__':
-    main()
+    app()
