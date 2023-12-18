@@ -1,4 +1,4 @@
-# Docker Hackathon
+# Steps to run locally
 
 Run `pip install -r requirements.txt` to install all dependencies for the project.
 
